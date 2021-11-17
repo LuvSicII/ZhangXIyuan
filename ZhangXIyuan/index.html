@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>图表展示</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='asset/index/img/chart.png' />
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/index/css/index.css">
+		<link rel="stylesheet" href="assets/colpick/css/colpick.css">
+	</head>
+	<body>
+		<div class="app-content">
+			<div class="main-box control-box">
+				<div class="panel panel-primary" style="height: 100%;">
+				    <div class="panel-heading" style="position: relative;">
+						<div title="绘制图形" class="draw-chart-btn"></div>
+				        <h3 class="panel-title doctor">
+				            图表参数控制栏
+							<div class="btn-group">
+								<button id="chartChangeBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">柱状/折线图<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li class="chart-li"><a href="#">柱状/折线图</a></li>
+									<li class="chart-li"><a href="#">扇形图</a></li>
+									<li class="chart-li"><a href="#">盒须图</a></li>
+								</ul>
+							</div>
+				        </h3>
+				    </div>
+				    <div class="panel-body" style="height: 100%;">
+						<div id="controlBox">
+							<div class="axis-control-box">
+								<p class="title-p axis-title-p">坐标轴属性</p>
+								<div class="axis-control-content">
+									<p>X轴颜色：<input class="color-input" id="colpickXaxis" value=""></p>
+									<p>X轴文字颜色：<input class="color-input"  id="colpickXlable" value=""></p>
+									<p>Y轴颜色：<input class="color-input"  id="colpickYaxis" value=""></p>
+									<p>Y轴文字颜色：<input class="color-input"  id="colpickYlable" value=""></p>
+									<p id="xData" style="width: 100%;">X轴数据(请用','隔开)：<input value=""></p>
+								</div>
+							</div>
+							<div class="data-control-box">
+								<p class="title-p data-title-p">数据属性(<span>柱状/折线图</span>)</p>
+								<div class="data-control-content">
+									<div title="添加数据" class="data-append-btn"></div>
+									<div class="data-append-box">
+										<ul class="no-data">
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+				    </div>
+				</div>
+			</div>
+			<div class="main-box chart-box">
+				<div class="panel panel-primary" style="height: 100%;">
+				    <div class="panel-heading">
+				        <h3 class="panel-title">
+				            图表展示栏
+				        </h3>
+				    </div>
+				    <div class="panel-body" style="height: 100%;">
+						<div id="chartBox"></div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!-- 包 -->
+	<script src="assets/common/js/jquery.min.js"></script>
+	<script src="assets/common/js/echarts.min.js"></script>
+	<!-- 画图方法 -->
+	<script src="assets/index/js/boxplotChart.js"></script>
+	<script src="assets/index/js/lineBarChart.js"></script>
+	<script src="assets/index/js/pieChart.js"></script>
+	<!-- 入口方法 -->
+	<script src="assets/index/js/index.js"></script>
+	<!-- 颜色插件 -->
+	<script src="assets/colpick/js/colpick.js"></script>
+	<!-- 样式方法 -->
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		$(function(){
+			//初始化一个入口类，调其他方法
+			let chartFunc = new ChartFunc();
+			//专属函数
+			chartFunc.identity();
+			//绘制图形点击事件
+			$('body').delegate('.draw-chart-btn','click',function(){
+				let text = $('#chartChangeBtn')[0].childNodes[0].nodeValue;
+				if(text == '柱状/折线图'){
+					//柱状折线图执行事件
+					$('.axis-control-box').css('display')=='inline-block' && chartFunc && chartFunc.initLineBarChart()
+				}else if(text == '扇形图'){
+					//扇形图执行事件
+					$('.axis-control-box').css('display')=='none' && chartFunc && chartFunc.initPieChart()
+				}else{
+					//盒须图执行事件
+					$('.axis-control-box').css('display')=='none' && chartFunc && chartFunc.initBoxplotChart()
+				}
+			})
+			//切换图表类型
+			$('body').delegate('.chart-li','click',function(){
+				let text = $(this).find('a').html()
+				$('.data-title-p').find('span').html(text)
+				$('#chartChangeBtn')[0].childNodes[0].nodeValue = text
+				//清空数据列表
+				$('.data-append-box ul').html('')
+				//增加无数据样式
+				$('.data-append-box ul').addClass('no-data')
+				if(text == '柱状/折线图'){
+					$('.axis-control-box').show()
+				}else{
+					$('.axis-control-box').hide()
+				}
+			})
+			//颜色插件
+			$('body').delegate('.color-input','click',function(){
+				chartFunc.clickColorInput(this)
+			})
+			//添加数据列表按钮
+			$('body').delegate('.data-append-btn','click',function(){
+				let text = $('#chartChangeBtn')[0].childNodes[0].nodeValue;
+				if(text == '柱状/折线图'){
+					//柱状折线图
+					chartFunc.addLineBarDataList()
+					$('.data-append-box ul').removeClass('no-data')
+				}else if(text == '扇形图'){
+					//扇形图
+					chartFunc.addPieDataList()
+					$('.data-append-box ul').removeClass('no-data')
+				}else{
+					//盒须图
+					chartFunc.addBoxplotDataList()
+					$('.data-append-box ul').removeClass('no-data')
+				}
+			
+			})
+			//删除数据列表
+			$('body').delegate('.data-delete-btn','click',function(){
+				$(this).parents('li').remove();
+				let str = $('.data-append-box ul').html()
+				str == '' || $('.data-append-box ul').addClass('no-data')
+			})
+			//切换柱状折线类型
+			$('body').delegate('.chart-span','click',function(){
+				let id = $(this).attr('id');
+				$(this).addClass('active')
+				if(id == 'lineChart'){
+					$(this).parents('.lb-select-type').find('#barChart').removeClass('active');
+					$(this).parents('li').find('.line-data-content').show()
+					$(this).parents('li').find('.bar-data-content').hide()
+				}else{
+					$(this).parents('.lb-select-type').find('#lineChart').removeClass('active')
+					$(this).parents('li').find('.line-data-content').hide()
+					$(this).parents('li').find('.bar-data-content').show()
+				}
+			})
+			//选中事件切换
+			$('body').delegate('.show-span','click',function(){
+				$(this).toggleClass('active')
+			})
+		})
+	
+	</script>
+</html>

@@ -1,0 +1,251 @@
+html,body{
+	height: 100%;
+	width: 100%;
+	background-color: #c2ceda;
+	overflow: hidden;
+}
+.no-data{
+	height: 100%;
+	width: 100%;
+	background: url(../img/no-data.png) center center no-repeat;
+	background-size: 120px 120px;
+}
+/* 整体	CSS开始 */
+.app-content{
+	margin: 100px 100px;
+	height: calc(100% - 200px);
+	width: calc(100% - 200px);
+	background-color: #c2ceda;
+}
+.main-box{
+	height: 100%;
+	width: calc(50% - 20px);
+	margin-right: 10px;
+	background-color: #fff;
+	display: inline-block;
+	vertical-align: middle;
+}
+#controlBox,#chartBox{
+	width: 100%;
+	height: calc(100% - 40px);
+}
+.doctor{
+	background: url(../img/nurse护士.png) left 10px center no-repeat;
+	background-size: 30px 30px;
+	text-indent: 60px;
+	text-align: left;
+}
+.draw-chart-btn{
+	height: 35px;
+	width: 35px;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	background: url(../img/init.png) center center no-repeat;
+	background-size: 100% 100%;
+	cursor: pointer;
+}
+.draw-chart-btn:hover{
+	background: url(../img/init1.png) center center no-repeat;
+	background-size: 100% 100%;
+}
+.chart-li a{
+	text-align: left;
+	text-indent: 0 !important;
+}
+.axis-control-box,.data-control-box{
+	width: 100%;
+	height: calc(50% - 70px);
+	margin: 0;
+	margin-bottom: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.data-control-box{
+	width: 100%;
+	height: calc(50% + 50px);
+	margin: 0;
+	margin-bottom: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.title-p{
+	height: 40px;
+	width: 100%;
+	margin: 0;
+	line-height: 40px;
+	font-size: 14px;
+	text-align: left;
+	text-indent: 60px;
+	color: cornflowerblue;
+}
+.axis-title-p{
+	background: url(../img/CAD图纸.png) left center no-repeat;
+	background-size: 40px 40px;
+}
+.data-title-p{
+	background: url(../img/模型管理.png) left center no-repeat;
+	background-size: 40px 40px;
+}
+.axis-control-content,.data-control-content{
+	height: calc(100% - 52px);
+	width: calc(100% - 2px);
+	margin: 0;
+	margin-top: 10px;
+	border: 1px solid #6495ED;
+	border-radius: 16px;
+	position: relative;
+}
+.axis-control-content p{
+	margin: 10px 5px;
+	margin-right: 0;
+	display: inline-block;
+	width: 200px;
+	color: cornflowerblue;
+}
+#xData input{
+	width: calc(100% - 200px);
+}
+.data-append-btn{
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border: 1px solid #6495ED;
+	border-radius: 5px;
+	background: url(../img/add.png) center center no-repeat;
+	background-size: 20px 20px;
+	cursor: pointer;
+}
+.data-append-btn:hover{
+	background: url(../img/add1.png) center center no-repeat;
+	background-size: 20px 20px;
+}
+.data-append-box{
+	height: calc(100% - 60px);
+	width: calc(100% - 20px);
+	position: absolute;
+	left: 10px;
+	top: 50px;
+	border-radius: 16px;
+}
+.data-append-box ul{
+	height: 100%;
+	width: calc(100% + 5px);
+	margin: 0;
+	padding: 0;
+	background-color: #4071a2;
+	border-radius: 16px;
+	overflow: hidden;
+	overflow-y: auto;
+	list-style-type: none;
+}
+.data-append-box ul li{
+	height: 170px;
+	width: calc(100% - 20px);
+	margin: 0 10px;
+	margin-top: 10px;
+	background-color: #aed1e8;
+	border-radius: 16px;
+}
+.data-append-box ul li:hover{
+	background-color: #b8e0f6;
+}
+.pie-li{
+	height: 70px !important;
+	border-radius: 16px;
+	position: relative;
+}
+.pie-li p{
+	margin: 10px 10px;
+	margin-right: 0;
+	display: inline-block;
+	width: 150px;
+	color: cornflowerblue;
+	margin-right: 85px;
+}
+.lb-select-type{
+	height: 30px;
+	width: 100%;
+	position: relative;
+}
+.data-delete-btn{
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	background: url(../img/delete1.png) center center no-repeat;
+	background-size: 20px 20px;
+	cursor: pointer;
+}
+.data-delete-btn:hover{
+	background: url(../img/delete.png) center center no-repeat;
+	background-size: 20px 20px;
+}
+.lb-select-type p{
+	height: 100%;
+	width: 80px;
+	margin: 0;
+	margin-left: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	color: #6b6768;
+	display: inline-block;
+	vertical-align: middle;
+	float: left;
+}
+.lb-select-type p span{
+	display: inline-block;
+	vertical-align: middle;
+	height: 14px;
+	width: 14px;
+	border: 2px solid #A27e83;
+	border-radius: 10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.lb-select-type p span:hover{
+	background: #965458 center center no-repeat;
+	background-size: 7px 7px;
+}
+.lb-select-type p span.active{
+	background: #965458 center center no-repeat;
+	background-size: 7px 7px;
+}
+.lb-data-content{
+	height: calc(100% - 30px);
+	width: 100%;
+}
+.lb-data-content p{
+	margin: 10px 10px;
+	margin-right: 0;
+	display: inline-block;
+	width: 150px;
+	color: cornflowerblue;
+}
+.lb-data-content p input{
+	width: 100% ;
+}
+#yData{
+	width: 90%;
+}
+/* 盒须图 */
+.boxplot-li{
+	height: 70px !important;
+	border-radius: 16px;
+	position: relative;
+}
+.boxplot-li p{
+	margin: 10px 10px;
+	margin-right: 0;
+	display: inline-block;
+	width: calc(100% - 20px);
+	color: cornflowerblue;
+	margin-right: 85px;
+}
+.boxplot-li p input{
+	width: 100%;
+}
+/* 整体CSS结束 */
